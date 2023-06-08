@@ -17,7 +17,7 @@ var db *sql.DB
 
 func InitDB() *sql.DB {
 	var err error
-	db, err = sql.Open("sqlite3", "sarkor1.db")
+	db, err = sql.Open("sqlite3", "sarkor.db")
 	if err != nil {
 		panic(err)
 	}
