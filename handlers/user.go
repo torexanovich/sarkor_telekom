@@ -39,7 +39,7 @@ func AuthenticateUser(c *gin.Context) {
 	if err != nil {
 		c.JSON(401, gin.H{"error": "Authentication failed"})
 		return
-	}
+	} 
 
 	c.SetCookie("SESSTOKEN", token, 3600, "/", "localhost", false, true)
 

@@ -15,6 +15,6 @@ func AuthMiddleware(c *gin.Context) {
 	}
 
 	fmt.Println("COOKIE>", cookie)
-
+ 
 	c.Next()
 }
