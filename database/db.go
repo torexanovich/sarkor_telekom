@@ -22,7 +22,6 @@ func InitDB() *sql.DB {
 		panic(err)
 	}
 
-	// Creating tables
 	query := `
 	CREATE TABLE IF NOT EXISTS users(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -80,7 +79,7 @@ func AuthenticateUser(login, password string) (string, int, error) {
 		SigninKey: "123",
 	}
 
-	token, err := jwtHandler.GenerateToken(login, userID) // Include the userID in the token
+	token, err := jwtHandler.GenerateToken(login, userID) 
 	if err != nil {
 		return "", 0, err
 	}
@@ -158,12 +157,11 @@ func (jwtHandler *JWTHandler) GenerateToken(login string, userID int) (string, e
 	claims := jwt.MapClaims{
 		"login":   login,
 		"user_id": userID,
-		"exp":     time.Now().Add(time.Hour * 24).Unix(), // token expiration time
+		"exp":     time.Now().Add(time.Hour * 24).Unix(), 
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	// Sign the token with the signing key
 	signedToken, err := token.SignedString([]byte(jwtHandler.SigninKey))
 	if err != nil {
 		return "", err
@@ -189,7 +187,7 @@ func (jwtHandler *JWTHandler) ExtractClaims(tokenStr string, signingKey string) 
 }
 
 func GetCurrentUserID(c *gin.Context) (int, error) {
-	tokenStr, err := c.Cookie("SESSTOKEN") // Getting the token from the cookie
+	tokenStr, err := c.Cookie("SESSTOKEN") 
 	if err != nil {
 		return 0, err
 	}

@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-	// Create database
 	database.InitDB()
 
 	router := gin.Default()
@@ -17,7 +16,6 @@ func main() {
 	router.POST("/user/register", handlers.RegisterUser)
 	router.POST("/user/auth", handlers.AuthenticateUser)
 
-	// Register middleware
 	router.Use(middleware.AuthMiddleware)
 
 	router.GET("/user/:name", handlers.GetUserByName)
@@ -26,6 +24,5 @@ func main() {
 	router.PUT("/user/phone", handlers.UpdatePhoneNumber)
 	router.DELETE("/user/phone/:phone_id", handlers.DeletePhoneNumber)
 
-	// Start the server
-	router.Run(":8080")
+	router.Run(":8080")	
 }
